@@ -1,0 +1,25 @@
+{
+    "require": {
+        "leocavalcante/siler": "^1.7.2",
+        "twig/twig": "^2.11",
+        "ext-json": "*",
+        "ext-fileinfo": "*",
+        "jimmiw/php-time-ago": "^3.1",
+        "twbs/bootstrap": "^4.4",
+        "fortawesome/font-awesome": "^5.12",
+        "ralouphie/mimey": "^2.1",
+        "pimple/pimple": "^3.2",
+        "voku/portable-utf8": "^5.4",
+        "aura/session": "^2.1.0",
+        "aws/aws-sdk-php": "^3.134",
+        "laminas/laminas-diactoros": "^2.2",
+        "nesbot/carbon": "^2.29",
+        "scriptfusion/byte-formatter": "^3.2",
+        "guym4c/fontawesome-file-icons": "^1.0.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Iwgb\\Media\\": "src/"
+        }
+    }
+}

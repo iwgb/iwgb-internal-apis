@@ -1,0 +1,67 @@
+@import '../../view/util';
+
+body {
+    font-family: 'Fira Sans', Helvetica Neue, Arial, sans-serif !important;
+}
+
+a {
+    cursor: pointer;
+}
+
+.link-unstyled, .link-unstyled:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.heading {
+    font-size: 3rem;
+}
+
+.bg-image {
+    background-position: center;
+    background-size: cover;
+}
+
+.interpunct-list span {
+
+    &::after {
+        content: "\00a0\00a0·\00a0"; // (nbsp)
+    }
+
+    &:last-of-type::after {
+        content: "";
+    }
+}
+
+.link-span-only {
+
+    &, &:hover {
+        text-decoration: none;
+    }
+
+    span {
+        text-decoration: underline;
+    }
+}
+
+.link-span-only-hover {
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: none;
+
+        span {
+            text-decoration: underline;
+        }
+    }
+}
+
+.btn-iwgb {
+    background-color: $iwgbRed;
+    color: white !important;
+
+    &:hover {
+        background-color: $iwgbRedDark;
+        color: white !important;
+    }
+}

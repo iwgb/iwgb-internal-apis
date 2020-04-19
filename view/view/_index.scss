@@ -1,0 +1,32 @@
+@import '../util';
+
+.view {
+
+    &__folders {
+
+        &__folder {
+            margin-top: .5rem;
+
+            &:first-of-type {
+                margin-top: 0;
+            }
+        }
+    }
+
+    &__file {
+        min-height: 20rem;
+
+        &__actions {
+            border: none;
+        }
+
+        &__name {
+            word-break: break-all;
+        }
+    }
+
+    @at-root .link-unstyled:hover &__linkText {
+        text-decoration: underline;
+    }
+}
+

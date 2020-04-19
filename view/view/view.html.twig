@@ -1,0 +1,126 @@
+{% extends 'root.html.twig' %}
+
+{% block body %}
+    <div class="d-flex justify-content-between">
+        <h1 class="global__heading font-weight-light">{{ folder }}</h1>
+        <div>
+            {% if parent is not empty %}
+                <a href="/{{ parent }}/view"
+                   class="btn btn-secondary"
+                >
+                    <i class="fas fa-arrow-left fa-fw"></i>
+                </a>
+            {% endif %}
+            <a href="/upload"
+               class="btn btn-iwgb"
+            >
+                <i class="fas fa-cloud-upload-alt fa-fw"></i>
+                <span class="d-none d-lg-inline ml-1">Upload</span>
+            </a>
+            <a href="/{{ encodedPath }}/newFolder" class="btn btn-iwgb">
+                <i class="fas fa-folder-plus fa-fw"></i>
+                <span class="d-none d-lg-inline ml-1">New folder</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        {% for folderGroup in folderGroups %}
+            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 mt-5 view__folders">
+                {% for folder in folderGroup %}
+                    {% if folder is not empty %}
+                        <a href="/{{ folder.id }}/view"
+                           class="link-unstyled card view__folders__folder"
+                        >
+                            <div class="px-4 py-3">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-folder fa-fw"></i>
+                                    <span class="ml-2 view__linkText">{{ folder.name }}</span>
+                                </div>
+                                <div>
+                                    <i class="fas fa-fw"></i>
+                                    <small class="text-muted ml-1">{{ folder.modified|timeAgo }}</small>
+                                </div>
+                            </div>
+                        </a>
+                    {% endif %}
+                {% endfor %}
+
+            </div>
+        {% endfor %}
+
+        {% for file in files %}
+            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 d-flex flex-column view__file">
+                <div class="card mt-5 flex-grow-1">
+                    {% if isImage(file.key) %}
+                        <div data-bg="{{ cdnUrl }}/{{ file.key }}"
+                             class="lazyload card-img-top bg-image flex-grow-1"
+                        ></div>
+                    {% else %}
+                        <div class="card-img-top bg-secondary text-white d-flex flex-grow-1 align-items-center justify-content-center">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-2x {{ file.name|fileIcon }}"></i>
+                                <span class="font-weight-bold ml-2">{{ getExtension(file.name)|upper }}</span>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="pl-4 pr-1 py-3">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div>
+                                <a href="{{ cdnUrl }}/{{ file.key }}"
+                                   class="text-dark link-unstyled"
+                                   target="_blank"
+                                >
+                                    <div class="view__linkText view__file__name">{{ file.name }}</div>
+                                    <small class="text-muted interpunct-list">
+                                        <span>{{ file.modified|timeAgo }}</span>
+                                        <span>{{ file.size|bytes }}</span>
+                                    </small>
+                                </a>
+                            </div>
+                            <a data-toggle="dropdown"
+                               id="{{ file.id }}"
+                               class="p-2"
+                            >
+                                <i class="fas fa-ellipsis-v fa-fw"></i>
+                            </a>
+                            <div class="dropdown-menu"
+                                 aria-labelledby="{{ file.id }}"
+                            >
+                                <a class="dropdown-item copy"
+                                   data-clipboard-text="{{ cdnUrl }}/{{ file.key }}"
+                                >
+                                    <i class="fas fa-copy fa-sm fa-fw"></i>
+                                    <span class="ml-1">Copy link</span>
+                                </a>
+                                <a class="dropdown-item copy"
+                                   data-clipboard-text="{{ shortUrl }}/{{ file.key|removeRoot }}"
+                                >
+                                    <i class="fas fa-copy fa-sm fa-fw"></i>
+                                    <span class="ml-1">Copy shortlink</span>
+                                </a>
+                                <a class="dropdown-item"
+                                   href="/{{ file.id }}/delete"
+                                >
+                                    <i class="fas fa-trash fa-sm fa-fw"></i>
+                                    <span class="ml-1">Delete</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% if folderGroups is empty and files is empty %}
+        <div class="d-flex justify-content-center my-5">
+            <p>No files or folders</p>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        const clipboard = new ClipboardJS('.copy');
+    </script>
+{% endblock %}

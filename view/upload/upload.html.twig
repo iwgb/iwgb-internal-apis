@@ -1,0 +1,94 @@
+{% extends 'root.html.twig' %}
+
+{% block body %}
+    <div>
+        <h1 class="global__heading font-weight-light">Upload</h1>
+    </div>
+    <div class="row mt-5">
+        <form action="/upload"
+              method="post"
+              enctype="multipart/form-data"
+              class="col-md-6"
+        >
+
+            <h3>File</h3>
+            <div class="my-3">
+                <input type="file"
+                       name="file"
+                       class="form-control"
+                       aria-describedby="fileHelp"
+                >
+                <small id="fileHelp"
+                       class="form-text text-muted"
+                >
+                    Maximum size 9MB.
+                </small>
+            </div>
+
+            <h3 class="mt-4">Name</h3>
+            <div class="my-3">
+                <input class="form-control disableOnChecked"
+                       name="filename"
+                       id="filename"
+                       pattern="^[a-zA-Z0-9\-]+$"
+                       required
+                       aria-describedby="filenameHelp"
+                       placeholder="Enter a file name"
+                >
+                <small id="filenameHelp"
+                       class="form-text text-muted"
+                >
+                    Just the name, excluding the extension. Letters, numbers or hyphens.
+                </small>
+            </div>
+            <div class="custom-control custom-checkbox my-3">
+                <input type="checkbox"
+                       class="custom-control-input disableInputs"
+                       id="generate"
+                       name="generate"
+                >
+                <label class="custom-control-label"
+                       for="generate"
+                >
+                    Or name with a random ID
+                </label>
+            </div>
+
+            <h3 class="mt-4">Location</h3>
+            <div class="my-3">
+                <select class="form-control"
+                        name="folder"
+                >
+                    {% for folder in folders %}
+                        <option value="{{ folder }}">{{ folder }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <input type="submit"
+                   class="btn btn-iwgb"
+                   value="Upload"
+            >
+        </form>
+    </div>
+
+    <script>
+        $('.disableInputs').change((e) => {
+            if (e.target.checked) {
+                $('.disableOnChecked').attr('disabled', '1')
+                    .addClass('upload__disabled');
+
+            } else {
+                $('.disableOnChecked').removeAttr('disabled')
+                    .removeClass('upload__disabled');
+            }
+        });
+
+        $(document).ready(() => $('.disableInputs').prop('checked', false));
+    </script>
+
+
+
+
+
+{% endblock %}
