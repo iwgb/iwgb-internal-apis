@@ -4,7 +4,6 @@ namespace Iwgb\Media\Handler;
 
 use Pimple\Container;
 use Psr\Http\Message\ServerRequestInterface;
-use Siler\Http\Request;
 
 class NewFolder extends RootHandler {
 

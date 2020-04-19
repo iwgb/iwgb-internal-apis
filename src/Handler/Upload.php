@@ -5,7 +5,6 @@ namespace Iwgb\Media\Handler;
 use Pimple\Container;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\UploadedFileInterface;
-use Siler\Http\Request;
 
 class Upload extends RootHandler {
 
