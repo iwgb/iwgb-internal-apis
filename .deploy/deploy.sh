@@ -13,7 +13,7 @@ mkdir upload
 
 chown -R www-data:www-data /var/www/iwgb-media
 chmod -R 774 /var/www/iwgb-media
-runuser -l deploy -c 'cd /var/www/iwgb-org-uk && composer install'
+runuser -l deploy -c 'cd /var/www/iwgb-media && composer install'
 
 cd /var/www/iwgb-media/public/css || exit 1
 sass --style compressed style.scss:style.css
