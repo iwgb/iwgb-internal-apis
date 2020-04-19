@@ -1,5 +1,5 @@
 # `iwgb-media`
-This repo contains a web app to manage content on a subdirectory of an S3 bucket.
+This repo contains a simple PHP/Bootstrap web app to manage content on a subdirectory of an S3 bucket.
 
 ## Onboarding
 Clone the repo and install the dependencies using Composer:
