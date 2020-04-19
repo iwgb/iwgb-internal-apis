@@ -16,6 +16,10 @@
     &__file {
         min-height: 20rem;
 
+        @include media-breakpoint-down(xs) {
+            min-height: 15rem;
+        }
+
         &__actions {
             border: none;
         }

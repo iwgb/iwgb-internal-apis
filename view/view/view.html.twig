@@ -1,23 +1,27 @@
 {% extends 'root.html.twig' %}
 
 {% block body %}
-    <div class="d-flex justify-content-between">
-        <h1 class="global__heading font-weight-light">{{ folder }}</h1>
-        <div>
+    <div class="row align-items-center">
+        <div class="col-7 col-sm-8">
+            <h1 class="pageHeading font-weight-light">{{ folder }}</h1>
+        </div>
+        <div class="col-5 col-sm-4 d-flex justify-content-end">
             {% if parent is not empty %}
                 <a href="/{{ parent }}/view"
-                   class="btn btn-secondary"
+                   class="btn btn-secondary mx-1"
                 >
                     <i class="fas fa-arrow-left fa-fw"></i>
                 </a>
             {% endif %}
             <a href="/upload"
-               class="btn btn-iwgb"
+               class="btn btn-iwgb mx-1"
             >
                 <i class="fas fa-cloud-upload-alt fa-fw"></i>
                 <span class="d-none d-lg-inline ml-1">Upload</span>
             </a>
-            <a href="/{{ encodedPath }}/newFolder" class="btn btn-iwgb">
+            <a href="/{{ encodedPath }}/newFolder"
+               class="btn btn-iwgb mx-1"
+            >
                 <i class="fas fa-folder-plus fa-fw"></i>
                 <span class="d-none d-lg-inline ml-1">New folder</span>
             </a>
@@ -26,7 +30,7 @@
 
     <div class="row">
         {% for folderGroup in folderGroups %}
-            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 mt-5 view__folders">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mt-2 mt-sm-5 view__folders">
                 {% for folder in folderGroup %}
                     {% if folder is not empty %}
                         <a href="/{{ folder.id }}/view"
@@ -50,8 +54,8 @@
         {% endfor %}
 
         {% for file in files %}
-            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 d-flex flex-column view__file">
-                <div class="card mt-5 flex-grow-1">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 d-flex flex-column view__file">
+                <div class="card mt-2 mt-sm-5 flex-grow-1">
                     {% if isImage(file.key) %}
                         <div data-bg="{{ cdnUrl }}/{{ file.key }}"
                              class="lazyload card-img-top bg-image flex-grow-1"

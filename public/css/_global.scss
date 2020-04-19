@@ -13,8 +13,12 @@ a {
     color: inherit;
 }
 
-.heading {
-    font-size: 3rem;
+.pageHeading {
+    font-size: 2.5rem;
+
+    @include media-breakpoint-down(xs) {
+        font-size: 2rem;
+    }
 }
 
 .bg-image {
