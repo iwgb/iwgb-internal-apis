@@ -5,7 +5,7 @@ namespace Iwgb\Media\Handler;
 use Pimple\Container;
 use Psr\Http\Message\ServerRequestInterface;
 
-class NewFolder extends RootHandler {
+class NewFolder extends ViewHandler {
 
     use SpacesActionTrait;
 
@@ -37,7 +37,7 @@ class NewFolder extends RootHandler {
 
         $parent = $this->getRoot(false) . $form['path'];
 
-        if (!$this->cdn->doesObjectExist($this->bucket, $parent)) {
+        if (!$this->store->doesObjectExist($this->bucket, $parent)) {
             $this->redirect("/{$this->getEncodedRoot()}/view", [
                 'action' => 'newFolder',
                 'status' => 'failed',
@@ -47,7 +47,7 @@ class NewFolder extends RootHandler {
 
         $path = "{$parent}{$form['name']}/";
 
-        $this->cdn->putObject([
+        $this->store->putObject([
             'Bucket' => $this->settings['spaces']['bucket'],
             'Key'    => $path,
             'ACL'    => 'public-read',

@@ -12,7 +12,7 @@ use Twig\TwigFilter;
 use Twig\TwigFunction;
 use voku\helper\UTF8;
 
-class View extends RootHandler {
+class View extends ViewHandler {
 
     use SpacesActionTrait;
 
@@ -37,7 +37,7 @@ class View extends RootHandler {
 
         $prefix = base64_decode($args['path']);
 
-        $objects = $this->cdn->listObjects([
+        $objects = $this->store->listObjects([
             'Bucket' => $this->settings['spaces']['bucket'],
             'Prefix' => $prefix,
         ])->toArray()['Contents'];

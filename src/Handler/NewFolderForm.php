@@ -2,7 +2,7 @@
 
 namespace Iwgb\Media\Handler;
 
-class NewFolderForm extends RootHandler {
+class NewFolderForm extends ViewHandler {
 
     use SpacesActionTrait;
 
@@ -13,7 +13,7 @@ class NewFolderForm extends RootHandler {
 
         $path = base64_decode($args['path']);
 
-        if (!$this->cdn->doesObjectExist($this->bucket, $path)) {
+        if (!$this->store->doesObjectExist($this->bucket, $path)) {
             $this->redirect("/{$this->getEncodedRoot()}/view", [
                 'action' => 'newFolder',
                 'status' => 'failed',

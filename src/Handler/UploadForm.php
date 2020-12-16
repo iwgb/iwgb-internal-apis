@@ -4,7 +4,7 @@ namespace Iwgb\Media\Handler;
 
 use voku\helper\UTF8;
 
-class UploadForm extends RootHandler {
+class UploadForm extends ViewHandler {
 
     use SpacesActionTrait;
 
@@ -13,7 +13,7 @@ class UploadForm extends RootHandler {
      */
     public function __invoke(array $args): void {
 
-        $objects = $this->cdn->listObjects([
+        $objects = $this->store->listObjects([
             'Bucket' => $this->settings['spaces']['bucket'],
             'Prefix' => $this->getRoot(),
         ])->toArray()['Contents'];

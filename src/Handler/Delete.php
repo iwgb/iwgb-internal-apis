@@ -2,7 +2,7 @@
 
 namespace Iwgb\Media\Handler;
 
-class Delete extends RootHandler {
+class Delete extends ViewHandler {
 
     use SpacesActionTrait;
 
@@ -13,7 +13,7 @@ class Delete extends RootHandler {
 
         $path = base64_decode($args['path']);
 
-        if (!$this->cdn->doesObjectExist($this->bucket, $path)) {
+        if (!$this->store->doesObjectExist($this->bucket, $path)) {
             $this->redirect("/{$this->getEncodedRoot()}/view", [
                 'action' => 'delete',
                 'status' => 'failed',
@@ -25,7 +25,7 @@ class Delete extends RootHandler {
             strrpos($path, '/', -2) + 1
         );
 
-        $this->cdn->deleteObject([
+        $this->store->deleteObject([
             'Bucket' => $this->bucket,
             'Key'    => $path,
         ]);

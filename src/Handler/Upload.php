@@ -6,7 +6,7 @@ use Pimple\Container;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\UploadedFileInterface;
 
-class Upload extends RootHandler {
+class Upload extends ViewHandler {
 
     use SpacesActionTrait;
 
@@ -60,7 +60,7 @@ class Upload extends RootHandler {
 
         $file->moveTo(APP_ROOT . '/var/upload/' . $generatedName);
 
-        $this->cdn->putObject([
+        $this->store->putObject([
             'Bucket' => $this->settings['spaces']['bucket'],
             'Key' => $path . $name,
             'ACL' => 'public-read',
