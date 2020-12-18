@@ -21,6 +21,8 @@ function dispatch(Container $c) {
     http\post('/api/getSignedUrl', new Handler\GetUploadUrl($c));
 
     http\options('/api/.*', new Handler\CorsPreflight($c));
+
+    http\get('/api/health', new Handler\Health($c));
 }
 
 try {

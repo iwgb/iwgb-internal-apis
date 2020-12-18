@@ -41,7 +41,9 @@ jobs:
             sh ./deploy.sh
 
       - name: Verify
-        run: echo ::set-env name=status::$(http -a iwgb:${{ secrets.QA_PASSWORD }} -h https://media.iwgb.org.uk | grep HTTP/ | cut -d ' ' -f 2)
+        run: echo ::set-env name=status::$(http -h https://media.iwgb.org.uk/api/health | grep HTTP/ | cut -d ' ' -f 2)
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
 
       - name: Check
         if: env.status == 500

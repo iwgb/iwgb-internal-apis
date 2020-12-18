@@ -12,7 +12,4 @@ Dotenv::createImmutable(APP_ROOT)->load();
 
 return (new Container([
     'settings' => require APP_ROOT . '/settings.php',
-]))->register(new Provider\TwigTemplateProvider())
-    ->register(new Provider\SpacesCdnProvider())
-    ->register(new Provider\DiactorosPsr7Provider())
-    ->register(new Provider\CarbonDateTimeProvider());
+]))->register(new Provider\SpacesCdnProvider());
