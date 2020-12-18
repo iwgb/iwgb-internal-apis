@@ -14,10 +14,13 @@ abstract class RootHandler {
 
     protected string $bucket;
 
+    protected string $publicRoot;
+
     public function __construct(Container $c) {
         $this->store = $c['cdn'];
         $this->settings = $c['settings'];
         $this->bucket = $this->settings['spaces']['bucket'];
+        $this->publicRoot = $this->settings['spaces']['publicRoot'];
     }
 
 

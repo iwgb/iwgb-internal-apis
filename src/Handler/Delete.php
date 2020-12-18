@@ -2,37 +2,28 @@
 
 namespace Iwgb\Media\Handler;
 
-class Delete extends ViewHandler {
+use Iwgb\Media\HttpCompatibleException;
+use Siler\Http\Response;
 
-    use SpacesActionTrait;
+class Delete extends AbstractApiHandler {
 
     /**
      * {@inheritdoc}
+     * @throws HttpCompatibleException
      */
     public function __invoke(array $args): void {
+        $this->authorise();
 
-        $path = base64_decode($args['path']);
+        $key = base64_decode($args['id'] ?? '');
 
-        if (!$this->store->doesObjectExist($this->bucket, $path)) {
-            $this->redirect("/{$this->getEncodedRoot()}/view", [
-                'action' => 'delete',
-                'status' => 'failed',
-            ]);
-            return;
-        }
-
-        $parent = substr($path, 0,
-            strrpos($path, '/', -2) + 1
-        );
+        $this->validateObjectKey($key, true);
 
         $this->store->deleteObject([
             'Bucket' => $this->bucket,
-            'Key'    => $path,
+            'Key' => $key,
         ]);
 
-        $this->redirect('/' . base64_encode($parent) . '/view', [
-            'action' => 'delete',
-            'status' => 'success',
-        ]);
+        self::withCors();
+        Response\json(['id' => $args['id']]);
     }
 }

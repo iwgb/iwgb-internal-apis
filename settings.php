@@ -1,7 +1,5 @@
 <?php
 
-$keys = require APP_ROOT . '/keys.php';
-
 $dev = true;
 
 return [
@@ -9,12 +7,13 @@ return [
     'spaces' => [
         'credentials' => [
             'key'    => 'KOWTSWXXMKRJFEXMSIGK',
-            'secret' => $keys['spaces'],
+            'secret' => $_ENV['SPACES_API_KEY'],
         ],
         'region'      => 'ams3',
         'bucket'      => 'iwgb',
-        'cdnUrl'      => 'https://cdn.iwgb.org.uk',
-        'shortUrl'    => 'https://iwgb.link',
         'publicRoot'  => 'bucket/',
+    ],
+    'api' => [
+        'key' => $_ENV['FILES_API_KEY']
     ],
 ];
