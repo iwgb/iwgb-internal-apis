@@ -6,8 +6,8 @@ return [
     'dev'    => $dev,
     'spaces' => [
         'credentials' => [
-            'key'    => $_ENV['SPACES_API_KEY_NAME'],
-            'secret' => $_ENV['SPACES_API_KEY'],
+            'key'    => $_ENV['S3_API_KEY_NAME'],
+            'secret' => $_ENV['S3_API_KEY'],
         ],
         'region'      => $_ENV['S3_REGION'],
         'bucket'      => $_ENV['S3_BUCKET'],
