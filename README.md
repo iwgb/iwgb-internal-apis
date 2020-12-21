@@ -12,7 +12,7 @@ Then run the application using the development server:
 composer run-script start:dev
 ```
 
-The app will now be running on port 49421.
+The app will now be running on port 49423.
 
 ## Contributing
 Issues and PRs are welcome.

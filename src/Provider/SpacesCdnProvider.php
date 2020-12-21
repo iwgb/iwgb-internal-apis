@@ -1,6 +1,6 @@
 <?php
 
-namespace Iwgb\Media\Provider;
+namespace Iwgb\Internal\Provider;
 
 use Aws\S3\S3Client;
 use Pimple\Container;

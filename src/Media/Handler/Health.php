@@ -1,6 +1,6 @@
 <?php
 
-namespace Iwgb\Media\Handler;
+namespace Iwgb\Internal\Media\Handler;
 
 use Siler\Http\Response;
 

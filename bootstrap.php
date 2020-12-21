@@ -1,7 +1,7 @@
 <?php
 
 use Dotenv\Dotenv;
-use Iwgb\Media\Provider;
+use Iwgb\Internal\Provider;
 use Pimple\Container;
 
 define('APP_ROOT', __DIR__);

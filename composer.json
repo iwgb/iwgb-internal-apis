@@ -12,10 +12,10 @@
     },
     "autoload": {
         "psr-4": {
-            "Iwgb\\Media\\": "src/"
+            "Iwgb\\Internal\\": "src/"
         }
     },
     "scripts": {
-        "start:dev": "php -S localhost:49421 public/index.php"
+        "start:dev": "php -S localhost:49423 public/index.php"
     }
 }

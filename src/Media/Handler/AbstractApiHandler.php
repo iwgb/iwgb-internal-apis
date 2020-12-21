@@ -1,8 +1,8 @@
 <?php
 
-namespace Iwgb\Media\Handler;
+namespace Iwgb\Internal\Media\Handler;
 
-use Iwgb\Media\HttpCompatibleException;
+use Iwgb\Internal\Media\HttpCompatibleException;
 use Siler\Http\Request;
 use Siler\Http\Response;
 use Teapot\StatusCode;

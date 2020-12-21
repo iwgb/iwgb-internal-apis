@@ -28,7 +28,7 @@ jobs:
           options: ''
           ssh_options: ''
           src: './'
-          dest: ${{ secrets.DEPLOY_USER }}@noproxy.iwgb.org.uk:/var/repo/iwgb-media
+          dest: ${{ secrets.DEPLOY_USER }}@noproxy.iwgb.org.uk:/var/repo/iwgb-internal-apis
 
       - name: Build
         uses: appleboy/ssh-action@v0.0.7
@@ -37,11 +37,11 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_KEY }}
           script: |
-            cd /var/repo/iwgb-media/.deploy
+            cd /var/repo/iwgb-internal-apis/.deploy
             sh ./deploy.sh
 
       - name: Verify
-        run: echo ::set-env name=status::$(http -h https://media.iwgb.org.uk/api/health | grep HTTP/ | cut -d ' ' -f 2)
+        run: echo ::set-env name=status::$(http -h https://internal.iwgb.org.uk/media/api/health | grep HTTP/ | cut -d ' ' -f 2)
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
 

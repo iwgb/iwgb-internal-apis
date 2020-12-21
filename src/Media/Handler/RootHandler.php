@@ -1,10 +1,9 @@
 <?php
 
-namespace Iwgb\Media\Handler;
+namespace Iwgb\Internal\Media\Handler;
 
 use Aws\S3\S3Client;
 use Pimple\Container;
-
 
 abstract class RootHandler {
 
