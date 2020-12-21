@@ -6,10 +6,8 @@ rsync -a . /var/www/iwgb-internal-apis --delete --exclude .git --exclude .deploy
 cd /var/repo/iwgb-internal-apis-static || exit 1
 rsync -a . /var/www/iwgb-internal-apis
 
-cd /var/www/iwgb-org-uk/public || exit 1
+cd /var/www/iwgb-internal-apis || exit 1
 mkdir var
-cd var || exit 1
-mkdir upload
 
 chown -R www-data:www-data /var/www/iwgb-internal-apis
 chmod -R 774 /var/www/iwgb-internal-apis
