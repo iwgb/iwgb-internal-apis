@@ -2,7 +2,7 @@
 
 namespace Iwgb\Internal\Media\Handler;
 
-use Iwgb\Internal\Media\HttpCompatibleException;
+use Iwgb\Internal\HttpCompatibleException;
 use Siler\Http\Response;
 
 class Delete extends AbstractApiHandler {

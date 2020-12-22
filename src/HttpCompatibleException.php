@@ -1,6 +1,6 @@
 <?php
 
-namespace Iwgb\Internal\Media;
+namespace Iwgb\Internal;
 
 use Exception;
 use Teapot\StatusCode;

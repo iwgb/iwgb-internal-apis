@@ -11,9 +11,9 @@ return [
         ],
         'region'      => $_ENV['MEDIA_S3_REGION'],
         'bucket'      => $_ENV['MEDIA_S3_BUCKET'],
-        'publicRoot'  => $_ENV['MEDIA_S3_PUBLIC_ROOT']
+        'publicRoot'  => $_ENV['MEDIA_S3_PUBLIC_ROOT'],
     ],
     'api' => [
-        'key' => $_ENV['MEDIA_FILES_API_KEY']
+        'key' => $_ENV['MEDIA_FILES_API_KEY'],
     ],
 ];

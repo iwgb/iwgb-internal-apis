@@ -2,9 +2,8 @@
 
 namespace Iwgb\Internal\Media\Handler;
 
-use Iwgb\Internal\Media\HttpCompatibleException;
+use Iwgb\Internal\HttpCompatibleException;
 use Siler\Http\Request;
-use Siler\Http\Response;
 use Teapot\StatusCode;
 
 abstract class AbstractApiHandler extends RootHandler {
@@ -53,13 +52,6 @@ abstract class AbstractApiHandler extends RootHandler {
                 StatusCode::FORBIDDEN,
             );
         }
-    }
-
-    protected static function withCors(): void {
-        Response\header('access-control-allow-origin', Request\header('origin') ?? '*');
-        Response\header('access-control-allow-credentials', 'true');
-        Response\header('access-control-allow-headers', 'authorization, content-type');
-        Response\header('access-control-allow-methods', 'GET, POST, DELETE, OPTIONS');
     }
 
     private static function titleToCamelCase(string $s): string {
