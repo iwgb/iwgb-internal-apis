@@ -1,10 +1,10 @@
 <?php
 
-namespace Iwgb\Internal\Media\Handler;
+namespace Iwgb\Internal;
 
 use Siler\Http\Response;
 
-class CorsPreflight extends AbstractApiHandler {
+class CorsPreflight extends AbstractHandler {
 
     /**
      * {@inheritdoc}
@@ -13,5 +13,4 @@ class CorsPreflight extends AbstractApiHandler {
         self::withCors();
         Response\no_content();
     }
-
 }

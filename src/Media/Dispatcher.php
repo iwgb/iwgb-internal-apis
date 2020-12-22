@@ -2,6 +2,7 @@
 
 namespace Iwgb\Internal\Media;
 
+use Iwgb\Internal\CorsPreflight;
 use Iwgb\Internal\HttpCompatibleException;
 use Pimple\Container;
 use Siler\Route as http;
@@ -19,7 +20,7 @@ class Dispatcher {
         http\delete("/media/api/files/(?'id'[A-z0-9=]+)", new Handler\Delete($c));
         http\post('/media/api/getSignedUrl', new Handler\GetUploadUrl($c));
 
-        http\options('/media/api/.*', new Handler\CorsPreflight($c));
+        http\options('/media/api/.*', new CorsPreflight($c));
 
         http\get('/media/api/health', new Handler\Health($c));
     }
