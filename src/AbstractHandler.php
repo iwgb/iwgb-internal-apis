@@ -2,6 +2,7 @@
 
 namespace Iwgb\Internal;
 
+use Iwgb\Internal\Provider\Provider;
 use Pimple\Container;
 use Siler\Http\Request;
 use Siler\Http\Response;
@@ -11,7 +12,7 @@ abstract class AbstractHandler {
     protected array $settings;
 
     public function __construct(Container $c) {
-        $this->settings = $c['settings'];
+        $this->settings = $c[Provider::SETTINGS];
     }
 
     /**

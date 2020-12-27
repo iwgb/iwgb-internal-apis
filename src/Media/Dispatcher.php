@@ -2,34 +2,25 @@
 
 namespace Iwgb\Internal\Media;
 
+use Iwgb\Internal\AbstractDispatcher;
 use Iwgb\Internal\CorsPreflight;
 use Iwgb\Internal\HttpCompatibleException;
-use Pimple\Container;
 use Siler\Route as http;
 
-class Dispatcher {
+class Dispatcher extends AbstractDispatcher {
 
     /**
-     * @param Container $c
      * @throws HttpCompatibleException
      * @noinspection PhpDocRedundantThrowsInspection
      */
-    private static function dispatch(Container $c): void {
-        http\get('/media/api/files', new Handler\GetAll($c));
-        http\post('/media/api/files', new Handler\Create($c));
-        http\delete("/media/api/files/(?'id'[A-z0-9=]+)", new Handler\Delete($c));
-        http\post('/media/api/getSignedUrl', new Handler\GetUploadUrl($c));
+    public function __invoke(): void {
+        http\get('/media/api/files', $this->handle(Handler\GetAll::class));
+        http\post('/media/api/files', $this->handle(Handler\Create::class));
+        http\delete("/media/api/files/(?'id'[A-z0-9=]+)", $this->handle(Handler\Delete::class));
+        http\post('/media/api/getSignedUrl', $this->handle(Handler\GetUploadUrl::class));
 
-        http\options('/media/api/.*', new CorsPreflight($c));
+        http\options('/media/api/.*', $this->handle(CorsPreflight::class));
 
-        http\get('/media/api/health', new Handler\Health($c));
-    }
-
-    /**
-     * @param $c
-     * @throws HttpCompatibleException
-     */
-    public function __invoke($c): void {
-        self::dispatch($c);
+        http\get('/media/api/health', $this->handle(Handler\Health::class));
     }
 }

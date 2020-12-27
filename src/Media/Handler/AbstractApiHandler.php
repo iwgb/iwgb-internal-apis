@@ -11,7 +11,7 @@ abstract class AbstractApiHandler extends RootHandler {
     private const EMPTY_OBJECT_ID_ERROR = 'Object ID must be provided';
     private const OBJECT_NOT_IN_PUBLIC_ROOT_ERROR = 'Object must be inside public root';
     private const OBJECT_NOT_FOUND_ERROR = 'Object not found';
-    private const INVALID_API_KEY = 'Key not authorised';
+    private const INVALID_API_KEY_ERROR = 'Key not authorised';
 
     /**
      * @param string $key
@@ -48,7 +48,7 @@ abstract class AbstractApiHandler extends RootHandler {
     protected function authorise(): void {
         if (Request\header('authorization') !== "Bearer {$this->settings['api']['key']}") {
             throw new HttpCompatibleException(
-                self::INVALID_API_KEY,
+                self::INVALID_API_KEY_ERROR,
                 StatusCode::FORBIDDEN,
             );
         }

@@ -1,12 +1,12 @@
 <?php
 
-namespace Iwgb\Internal\Roovolt;
+namespace Iwgb\Internal\Roovolt\Dto;
 
 use Iwgb\Internal\HttpCompatibleException;
 use Siler\Http\Request;
 use Teapot\StatusCode;
 
-class GetInvoiceUrlDto {
+class GetInvoiceUploadUrlsDto {
 
     private const RIDER_ID_PREFIX = 'RI';
 

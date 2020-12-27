@@ -3,6 +3,7 @@
 namespace Iwgb\Internal\Media\Handler;
 
 use Iwgb\Internal\HttpCompatibleException;
+use Iwgb\Internal\Provider\SpacesCdnProvider as S3;
 use Siler\Http\Request;
 use Siler\Http\Response;
 
@@ -28,7 +29,7 @@ class GetUploadUrl extends AbstractApiHandler {
             'url' => (string) $this->store->createPresignedRequest(
                 $this->store->getCommand('PutObject', [
                     'Bucket' => $this->bucket,
-                    'Key' => $key,
+                    'Key' => S3::sanitiseKey($key),
                     'ACL' => 'public-read',
                     'ContentType' => $mime,
                 ]),

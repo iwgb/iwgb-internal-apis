@@ -11,8 +11,8 @@ use Siler\Route as http;
 use Teapot\StatusCode;
 
 try {
-    (new Media\Dispatcher())($c);
-    (new Roovolt\Dispatcher())($c);
+    (new Media\Dispatcher($c))();
+    (new Roovolt\Dispatcher($c))();
 } catch (HttpCompatibleException $e) {
     Response\json(
         ['error' => $e->getMessage()],
@@ -24,7 +24,6 @@ try {
         StatusCode::INTERNAL_SERVER_ERROR,
     );
 }
-
 
 if (!Router\get(http\DID_MATCH, false)) {
     Response\output('not found', StatusCode::NOT_FOUND);
