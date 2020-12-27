@@ -23,7 +23,7 @@ abstract class AbstractHandler {
     protected static function withCors(): void {
         Response\header('access-control-allow-origin', Request\header('origin') ?? '*');
         Response\header('access-control-allow-credentials', 'true');
-        Response\header('access-control-allow-headers', 'authorization, content-type');
+        Response\header('access-control-allow-headers', Request\header('access-control-request-headers'));
         Response\header('access-control-allow-methods', 'GET, POST, DELETE, OPTIONS');
     }
 }
