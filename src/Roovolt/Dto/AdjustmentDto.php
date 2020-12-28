@@ -3,8 +3,9 @@
 namespace Iwgb\Internal\Roovolt\Dto;
 
 use Iwgb\Internal\HttpCompatibleException;
+use JsonSerializable;
 
-class AdjustmentDto extends AbstractDto {
+class AdjustmentDto extends AbstractDto implements JsonSerializable {
 
     public string $label;
 
@@ -22,7 +23,7 @@ class AdjustmentDto extends AbstractDto {
         $this->amount = $this->required('amount');
     }
 
-    public function toArray(): array {
+    public function jsonSerialize(): array {
         return [
             'Label' => $this->label,
             'Amount' => $this->amount,

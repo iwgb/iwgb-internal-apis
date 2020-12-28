@@ -4,7 +4,7 @@ namespace Iwgb\Internal\Roovolt\Handler;
 
 use Iwgb\Internal\HttpCompatibleException;
 use Iwgb\Internal\Roovolt\Dto\RetrieveInvoiceDto;
-use Siler\Http\Response;
+use Siler\Http;
 use Teapot\StatusCode;
 
 class RetrieveInvoice extends RootHandler {
@@ -37,7 +37,7 @@ class RetrieveInvoice extends RootHandler {
             );
         }
 
-        Response\redirect(
+        Http\redirect(
             (string) $this->store->createPresignedRequest(
                 $this->store->getCommand('GetObject', [
                     'Bucket' => $this->bucket,

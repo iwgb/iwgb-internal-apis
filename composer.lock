@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b58a84a3f484f01daa00c264b5812a48",
+    "content-hash": "2d3d692da8f4458fe88a79e0f6388987",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -320,16 +320,16 @@
         },
         {
             "name": "guym4c/airtable-client",
-            "version": "v3.0.0",
+            "version": "v4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guym4c/airtable-client.git",
-                "reference": "b3ac55c994c3770e6dcd63c2589eee4c5157887c"
+                "reference": "34519ec92f775f5e79fa027fa2665be0ee4ab494"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guym4c/airtable-client/zipball/b3ac55c994c3770e6dcd63c2589eee4c5157887c",
-                "reference": "b3ac55c994c3770e6dcd63c2589eee4c5157887c",
+                "url": "https://api.github.com/repos/guym4c/airtable-client/zipball/34519ec92f775f5e79fa027fa2665be0ee4ab494",
+                "reference": "34519ec92f775f5e79fa027fa2665be0ee4ab494",
                 "shasum": ""
             },
             "require": {
@@ -368,9 +368,9 @@
             ],
             "support": {
                 "issues": "https://github.com/guym4c/airtable-client/issues",
-                "source": "https://github.com/guym4c/airtable-client/tree/v3.0.0"
+                "source": "https://github.com/guym4c/airtable-client/tree/v4.0.0"
             },
-            "time": "2020-12-22T14:17:08+00:00"
+            "time": "2020-12-28T16:47:38+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",

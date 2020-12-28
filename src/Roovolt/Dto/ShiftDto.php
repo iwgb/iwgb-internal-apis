@@ -4,8 +4,9 @@ namespace Iwgb\Internal\Roovolt\Dto;
 
 use Carbon\Carbon as DateTime;
 use Iwgb\Internal\HttpCompatibleException;
+use JsonSerializable;
 
-class ShiftDto extends AbstractDto {
+class ShiftDto extends AbstractDto implements JsonSerializable {
 
     public DateTime $start;
 
@@ -29,7 +30,7 @@ class ShiftDto extends AbstractDto {
         $this->total = $this->required('total');
     }
 
-    public function toArray(): array {
+    public function jsonSerialize(): array {
         return [
             'Start' => $this->start->toIso8601ZuluString(),
             'End' => $this->end->toIso8601ZuluString(),
