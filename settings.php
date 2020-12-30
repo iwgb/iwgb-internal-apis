@@ -21,6 +21,11 @@ return [
     'api' => [
         'key' => $_ENV['MEDIA_FILES_API_KEY'],
     ],
+    'redis' => [
+        'host' => $_ENV['REDIS_HOST'],
+        'port' => $_ENV['REDIS_PORT'],
+        'password' => $_ENV['REDIS_PASSWORD'],
+    ],
     'roovolt' => [
         'airtable' => [
             'key' => $_ENV['AIRTABLE_API_KEY'],

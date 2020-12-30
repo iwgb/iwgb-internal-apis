@@ -11,7 +11,6 @@ class RetrieveInvoice extends RootHandler {
 
     private const URL_EXPIRY = '+1 minute';
 
-    private const INVALID_KEY_ERROR = "You're not allowed to do that";
     private const FILE_NOT_FOUND_ERROR = 'That file does not exist';
 
     /**

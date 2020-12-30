@@ -11,6 +11,7 @@ use Pimple\Container;
 abstract class RootHandler extends AbstractHandler {
 
     protected const BUCKET_PREFIX = 'branch/clb/invoices/';
+    protected const INVALID_KEY_ERROR = "You're not allowed to do that";
 
     protected S3Client $store;
 

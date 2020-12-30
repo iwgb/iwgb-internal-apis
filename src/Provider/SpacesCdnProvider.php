@@ -12,7 +12,7 @@ class SpacesCdnProvider implements ServiceProviderInterface {
      * @inheritDoc
      */
     public function register(Container $c) {
-        $c['cdn'] = fn(Container $c): S3Client => new S3Client([
+        $c[Provider::SPACES] = fn(Container $c): S3Client => new S3Client([
             'version'    => 'latest',
             'region'     => $c[Provider::SETTINGS]['spaces']['region'],
             'endpoint'   => 'https://' . $c[Provider::SETTINGS]['spaces']['region'] . '.digitaloceanspaces.com',

@@ -8,6 +8,9 @@ use JsonSerializable;
 
 class ShiftDto extends AbstractDto implements JsonSerializable {
 
+    private const API_DATE_FORMAT = 'Y-m-d';
+    private const API_TIME_FORMAT = 'H:i:s.v';
+
     public DateTime $start;
 
     public DateTime $end;
@@ -32,12 +35,17 @@ class ShiftDto extends AbstractDto implements JsonSerializable {
 
     public function jsonSerialize(): array {
         return [
-            'Start' => $this->start->toIso8601ZuluString(),
-            'End' => $this->end->toIso8601ZuluString(),
+            'Start' => self::getApiDateTime($this->start),
+            'End' => self::getApiDateTime($this->end),
             'Hours' => round($this->start->diffInMinutes($this->end) / 60, 2),
             'Orders' => $this->orders,
             'Pay' => $this->total,
         ];
+    }
+
+    private function getApiDateTime(DateTime $datetime): string {
+        return $datetime->format(self::API_DATE_FORMAT) . 'T' .
+            $datetime->format(self::API_TIME_FORMAT) . 'Z';
     }
 
 }

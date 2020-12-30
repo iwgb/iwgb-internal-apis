@@ -12,7 +12,7 @@ class AirtableProvider implements ServiceProviderInterface {
      * {@inheritdoc}
      */
     public function register(Container $c) {
-        $c['roovolt_airtable'] = fn (): Airtable =>
+        $c[Provider::ROOVOLT_AIRTABLE] = fn (): Airtable =>
         new Airtable(
             $c[Provider::SETTINGS]['roovolt']['airtable']['key'],
             $c[Provider::SETTINGS]['roovolt']['airtable']['base'],
