@@ -46,6 +46,8 @@ class InvoiceDto extends AbstractDto {
         return [
             'Invoice ID' => $this->id,
             'Rider ID' => $parent->riderId,
+            'Vehicle' => $parent->vehicle,
+            'Zone' => $parent->zone,
             'Status' => $this->status,
             'Hash' => $this->hash,
             'Start' => $this->start->toDateString(),
