@@ -25,7 +25,7 @@ class GetInvoiceUploadUrlsDto {
         $data = Request\json();
 
         $this->riderId = $data['riderId'] ?? false
-            ? self::RIDER_ID_PREFIX . "-{$data['riderId']}"
+            ? $data['riderId']
             : self::RIDER_ID_PREFIX . '-XX' . uniqid();
 
         $invoices = $data['invoices'] ?? [];
