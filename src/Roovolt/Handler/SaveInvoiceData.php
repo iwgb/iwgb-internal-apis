@@ -3,39 +3,40 @@
 namespace Iwgb\Internal\Roovolt\Handler;
 
 use Guym4c\Airtable\AirtableApiException;
+use Iwgb\Internal\HttpCompatibleException;
 use Iwgb\Internal\Roovolt\Dto\SaveInvoiceDataDto;
 use Iwgb\Internal\Roovolt\Table;
 use JsonSerializable;
+use Siler\Http\Request;
 use Siler\Http\Response;
+use Teapot\StatusCode;
 
 class SaveInvoiceData extends AbstractInvoiceStoreHandler {
 
     /**
      * {@inheritdoc}
      * @throws AirtableApiException
+     * @throws HttpCompatibleException
      */
     public function __invoke(array $args): void {
+        if (Request\get('key') !== $this->settings['api']['key']) {
+            throw new HttpCompatibleException(
+                self::INVALID_KEY_ERROR,
+                StatusCode::FORBIDDEN,
+            );
+        }
+
         $data = new SaveInvoiceDataDto();
 
         $invoicesData = [];
-        $invoices = [];
+        $invoicesById = [];
         foreach ($data->invoices as $i => $invoice) {
-            if (
-                $invoice->status === 'success'
-                && $this->airtable->find(Table::INVOICES, 'Hash', $invoice->hash) !== []
-            ) {
-                $this->store->deleteObject([
-                    'Bucket' => $this->bucket,
-                    'Key'    => self::BUCKET_PREFIX . self::getInvoiceFilename($data->riderId, $invoice->id),
-                ]);
-                continue;
-            }
             $invoiceData = $invoice->toArray($data);
             $invoicesData[] = array_merge(
-                $invoice->toArray($data),
+                $invoiceData,
                 ['Status' => $invoiceData['Status'] === 'success' ? 'pending' : 'failed'],
             );
-            $invoices[$invoice->id] = [
+            $invoicesById[$invoice->id] = [
                 'invoice' => $invoiceData,
                 'shifts' => self::serializeAll($invoice->shifts),
                 'adjustments' => self::serializeAll($invoice->adjustments),
@@ -43,11 +44,13 @@ class SaveInvoiceData extends AbstractInvoiceStoreHandler {
         }
         $invoiceRecords = $this->airtable->createAll(Table::INVOICES, $invoicesData);
 
+        $dataToCache = [];
         foreach ($invoiceRecords as $invoiceRecord) {
-            $this->redis->set($invoiceRecord->getId(), json_encode(
-                $invoices[$invoiceRecord->{'Invoice ID'}]
-            ));
+            $dataToCache[$invoiceRecord->getId()] =  json_encode(
+                $invoicesById[$invoiceRecord->{'Invoice ID'}]
+            );
         }
+        $this->redis->mset($dataToCache);
 
         self::withCors();
         Response\no_content();

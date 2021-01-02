@@ -17,7 +17,7 @@ class UploadInvoicesToAirtable extends AbstractInvoiceStoreHandler {
      * @throws HttpCompatibleException
      */
     public function __invoke(array $args): void {
-        if (Request\get('key') !== $this->settings['roovolt']['invoiceKey']) {
+        if (Request\get('key') !== $this->settings['api']['key']) {
             throw new HttpCompatibleException(
                 self::INVALID_KEY_ERROR,
                 StatusCode::FORBIDDEN,
@@ -34,21 +34,36 @@ class UploadInvoicesToAirtable extends AbstractInvoiceStoreHandler {
         $adjustments = [];
         $invoiceIds = [];
         foreach ($unprocessedInvoices as $airtableInvoice) {
-            $invoiceId = $airtableInvoice->getId();
-            $invoiceIds[] = $invoiceId;
-            $data = json_decode($this->redis->get($invoiceId), true);
+            $invoiceAirtableId = $airtableInvoice->getId();
+            $invoiceIds[] = $invoiceAirtableId;
+
+            $data = json_decode($this->redis->get($invoiceAirtableId), true);
+
+            if (
+                count($this->airtable->find(Table::INVOICES, 'Hash', $airtableInvoice->{'Hash'})) > 1
+            ) {
+                $this->airtable->delete(Table::INVOICES, $invoiceAirtableId);
+                $this->store->deleteObject([
+                    'Bucket' => $this->bucket,
+                    'Key'    => self::BUCKET_PREFIX . self::getInvoiceFilename(
+                        $airtableInvoice->{'Rider ID'},
+                        $airtableInvoice->{'Invoice ID'},
+                    ),
+                ]);
+                continue;
+            }
 
             /** @noinspection PhpUndefinedFieldInspection */
             $airtableInvoice->Status = 'success';
 
             $shifts = array_merge(
                 $shifts,
-                self::prepareChildren($data['shifts'], $invoiceId),
+                self::prepareChildren($data['shifts'], $invoiceAirtableId),
             );
 
             $adjustments = array_merge(
                 $adjustments,
-                self::prepareChildren($data['adjustments'], $invoiceId),
+                self::prepareChildren($data['adjustments'], $invoiceAirtableId),
             );
         }
 

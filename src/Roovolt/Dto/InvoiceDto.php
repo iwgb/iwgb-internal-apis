@@ -33,11 +33,11 @@ class InvoiceDto extends AbstractDto {
 
         $this->id = $this->required('id');
         $this->status = $this->required('status');
-        $this->hash = $this->status
+        $this->hash = $this->status === 'success'
             ? $this->required('hash')
             : null;
-        $this->start = DateTime::create($this->required('start'));
-        $this->end = DateTime::create($this->required('end'));
+        $this->start = DateTime::create($data['start'] ?? '');
+        $this->end = DateTime::create($data['end'] ?? '');
         $this->shifts = $this->collection('shifts', ShiftDto::class);
         $this->adjustments = $this->collection('adjustments', AdjustmentDto::class);
     }
