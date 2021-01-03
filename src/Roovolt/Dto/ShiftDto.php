@@ -17,7 +17,7 @@ class ShiftDto extends AbstractDto implements JsonSerializable {
 
     public int $orders;
 
-    public float $total;
+    public float $pay;
 
     /**
      * ShiftDto constructor.
@@ -30,7 +30,7 @@ class ShiftDto extends AbstractDto implements JsonSerializable {
         $this->start = DateTime::create($this->required('start'));
         $this->end = DateTime::create($this->required('end'));
         $this->orders = $this->required('orders');
-        $this->total = $this->required('total');
+        $this->pay = $this->required('pay');
     }
 
     public function jsonSerialize(): array {
@@ -39,7 +39,7 @@ class ShiftDto extends AbstractDto implements JsonSerializable {
             'End' => self::getApiDateTime($this->end),
             'Hours' => round($this->start->diffInMinutes($this->end) / 60, 2),
             'Orders' => $this->orders,
-            'Pay' => $this->total,
+            'Pay' => $this->pay,
         ];
     }
 
