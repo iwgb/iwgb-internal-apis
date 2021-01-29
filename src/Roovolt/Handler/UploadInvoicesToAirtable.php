@@ -38,6 +38,11 @@ class UploadInvoicesToAirtable extends AbstractInvoiceStoreHandler {
             $invoiceIds[] = $invoiceAirtableId;
 
             $data = json_decode($this->redis->get($invoiceAirtableId), true);
+            if ($data === null) {
+                $airtableInvoice->{'Status'} = 'failed';
+                $this->airtable->update($airtableInvoice);
+                continue;
+            }
 
             if (
                 count($this->airtable->find(Table::INVOICES, 'Hash', $airtableInvoice->{'Hash'})) > 1
