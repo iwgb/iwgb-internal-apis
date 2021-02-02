@@ -3,12 +3,23 @@
 namespace Iwgb\Internal\Roovolt\Handler;
 
 use Iwgb\Internal\HttpCompatibleException;
+use Iwgb\Internal\Provider\Provider;
 use Iwgb\Internal\Roovolt\Dto\SaveInvoiceDataDto;
+use Pimple\Container;
+use Predis as Redis;
 use Siler\Http\Request;
 use Siler\Http\Response;
 use Teapot\StatusCode;
 
-class SaveInvoiceData extends AbstractInvoiceStoreHandler {
+class SaveInvoiceData extends RootHandler {
+
+    private Redis\Client $redis;
+
+    public function __construct(Container $c) {
+        parent::__construct($c);
+
+        $this->redis = $c[Provider::REDIS];
+    }
 
     /**
      * {@inheritdoc}
