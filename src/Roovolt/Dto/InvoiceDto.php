@@ -42,16 +42,26 @@ class InvoiceDto extends AbstractDto {
         $this->adjustments = $this->collection('adjustments', AdjustmentDto::class);
     }
 
-    public function toArray(SaveInvoiceDataDto $parent): array {
+    public function serialize(SaveInvoiceDataDto $parent): array {
+        $shifts = [];
+        $adjustments = [];
+        foreach ($this->shifts as $shift) {
+            $shifts[] = $shift->jsonSerialize();
+        }
+        foreach ($this->adjustments as $adjustment) {
+            $adjustments[] = $adjustment->jsonSerialize();
+        }
         return [
-            'Invoice ID' => $this->id,
-            'Rider ID' => $parent->riderId,
-            'Vehicle' => $parent->vehicle,
-            'Zone' => $parent->zone,
-            'Status' => $this->status,
-            'Hash' => $this->hash,
-            'Start' => $this->start->toDateString(),
-            'End' => $this->end->toDateString(),
+            'id' => $this->id,
+            'riderId' => $parent->riderId,
+            'vehicle' => $parent->vehicle,
+            'zone' => $parent->zone,
+            'status' => $this->status,
+            'hash' => $this->hash,
+            'start' => $this->start->toDateString(),
+            'end' => $this->end->toDateString(),
+            'shifts' => $shifts,
+            'adjustments' => $adjustments,
         ];
     }
 

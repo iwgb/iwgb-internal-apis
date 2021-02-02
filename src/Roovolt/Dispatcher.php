@@ -11,7 +11,6 @@ class Dispatcher extends AbstractDispatcher {
     public function __invoke(): void {
         http\post('/roovolt/api/getInvoiceUploadUrls', $this->handle(Handler\GetInvoiceUploadUrls::class));
         http\post('/roovolt/api/saveInvoiceData', $this->handle(Handler\SaveInvoiceData::class));
-        http\get('/roovolt/api/processInvoices', $this->handle(Handler\UploadInvoicesToAirtable::class));
         http\get('/roovolt/invoice', $this->handle(Handler\RetrieveInvoice::class));
 
         http\options('/roovolt/api/.*', $this->handle(CorsPreflight::class));
