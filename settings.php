@@ -27,11 +27,6 @@ return [
         'password' => $_ENV['REDIS_PASSWORD'],
     ],
     'roovolt' => [
-        'airtable' => [
-            'key' => $_ENV['AIRTABLE_API_KEY'],
-            'base' => $_ENV['ROOVOLT_AIRTABLE_BASE_ID'],
-            'proxyKey' => $_ENV['AIRTABLE_PROXY_KEY'],
-        ],
         'invoiceKey' => $_ENV['ROOVOLT_INVOICE_RETRIEVAL_KEY'],
     ],
 ];
