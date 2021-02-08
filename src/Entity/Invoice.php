@@ -26,6 +26,11 @@ class Invoice {
     protected string $zone;
 
     /**
+     * @ORM\Column
+     */
+    protected string $status;
+
+    /**
      * @ORM\Column(type="text", length=65535)
      */
     protected string $data;
@@ -67,6 +72,20 @@ class Invoice {
      */
     public function getZone(): string {
         return $this->zone;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus(): string {
+        return $this->status;
+    }
+
+    /**
+     * @param string $status
+     */
+    public function setStatus(string $status): void {
+        $this->status = $status;
     }
 
     /**
