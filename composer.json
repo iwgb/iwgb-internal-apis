@@ -20,6 +20,7 @@
         }
     },
     "scripts": {
-        "start:dev": "php -S localhost:49423 public/index.php"
+        "start:dev": "php -S localhost:49423 public/index.php",
+        "build:db": "vendor/bin/doctrine orm:schema-tool:create"
     }
 }

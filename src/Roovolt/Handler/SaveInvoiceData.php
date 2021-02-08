@@ -55,6 +55,7 @@ class SaveInvoiceData extends RootHandler {
 
             $invoice = (new Invoice($invoiceData->id));
             $invoice->setHash($invoiceData->hash);
+            $invoice->setZone($data->zone);
             $invoice->setData(json_encode($invoiceData->serialize($data)));
             $this->em->persist($invoice);
         }

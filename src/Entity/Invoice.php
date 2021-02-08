@@ -21,6 +21,11 @@ class Invoice {
     protected ?string $hash;
 
     /**
+     * @ORM\Column
+     */
+    protected string $zone;
+
+    /**
      * @ORM\Column(type="text", length=65535)
      */
     protected string $data;
@@ -55,6 +60,20 @@ class Invoice {
      */
     public function setHash(?string $hash): void {
         $this->hash = $hash;
+    }
+
+    /**
+     * @return string
+     */
+    public function getZone(): string {
+        return $this->zone;
+    }
+
+    /**
+     * @param string $zone
+     */
+    public function setZone(string $zone): void {
+        $this->zone = $zone;
     }
 
     /**
