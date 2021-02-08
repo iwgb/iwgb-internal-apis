@@ -1,9 +1,22 @@
 <?php
 
-$dev = $_ENV['ENVIRONMENT'] === 'dev';
+$isDev = $_ENV['ENVIRONMENT'] === 'dev';
 
 return [
-    'dev'    => $dev,
+    'dev'    => $isDev,
+    'db'       => [
+        'devMode'   => $isDev,
+        'entityDir'  => APP_ROOT . '/src/Entity',
+        'connection' => [
+            'driver'   => $_ENV['DB_DRIVER'],
+            'host'     => $_ENV['DB_HOST'],
+            'port'     => $_ENV['DB_PORT'],
+            'dbname'   => $_ENV['DB_NAME'],
+            'charset'  => $_ENV['DB_CHARSET'],
+            'user'     => $_ENV['DB_USER'],
+            'password' => $_ENV['DB_PASSWORD'],
+        ],
+    ],
     'spaces' => [
         'credentials' => [
             'key'    => $_ENV['MEDIA_S3_API_KEY_NAME'],

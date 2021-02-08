@@ -13,4 +13,4 @@ Dotenv::createImmutable(APP_ROOT)->load();
 return (new Container([
     'settings' => require APP_ROOT . '/settings.php',
 ]))->register(new Provider\SpacesCdnProvider())
-    ->register(new Provider\RedisCacheProvider());
+    ->register(new Provider\DoctrineDatabaseProvider());
