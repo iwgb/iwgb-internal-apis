@@ -31,6 +31,11 @@ class Invoice {
     protected string $status;
 
     /**
+     * @ORM\Column
+     */
+    protected string $riderId;
+
+    /**
      * @ORM\Column(type="text", length=65535)
      */
     protected string $data;
@@ -107,5 +112,19 @@ class Invoice {
      */
     public function setData(string $data): void {
         $this->data = $data;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRiderId(): string {
+        return $this->riderId;
+    }
+
+    /**
+     * @param string $riderId
+     */
+    public function setRiderId(string $riderId): void {
+        $this->riderId = $riderId;
     }
 }

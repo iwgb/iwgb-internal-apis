@@ -52,11 +52,11 @@ class SaveInvoiceData extends RootHandler {
                 ]);
                 continue;
             }
-
             $invoice = (new Invoice($invoiceData->id));
             $invoice->setHash($invoiceData->hash);
             $invoice->setZone($data->zone);
             $invoice->setStatus($invoiceData->status);
+            $invoice->setRiderId($data->riderId);
             $invoice->setData(json_encode($invoiceData->serialize($data)));
             $this->em->persist($invoice);
         }
