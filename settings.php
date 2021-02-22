@@ -36,5 +36,10 @@ return [
     ],
     'roovolt' => [
         'invoiceKey' => $_ENV['ROOVOLT_INVOICE_RETRIEVAL_KEY'],
+        'airtable' => [
+            'key' => $_ENV['AIRTABLE_KEY'],
+            'base' => $_ENV['ROOVOLT_AIRTABLE_BASE_ID'],
+            'proxyKey' => $_ENV['AIRTABLE_PROXY_KEY'],
+        ],
     ],
 ];
