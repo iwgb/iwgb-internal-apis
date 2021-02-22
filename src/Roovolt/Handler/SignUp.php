@@ -7,6 +7,7 @@ use Guym4c\Airtable\AirtableApiException;
 use Iwgb\Internal\Provider\Provider;
 use Iwgb\Internal\Roovolt\Dto\SignUpDto;
 use Pimple\Container;
+use Siler\Http\Response;
 
 class SignUp extends RootHandler {
 
@@ -26,5 +27,8 @@ class SignUp extends RootHandler {
         $data = new SignUpDto();
 
         $this->airtable->create('Data', $data->jsonSerialize());
+
+        self::withCors();
+        Response\no_content();
     }
 }
