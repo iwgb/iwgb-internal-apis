@@ -14,6 +14,7 @@ class Dispatcher extends AbstractDispatcher {
         http\get('/roovolt/invoice', $this->handle(Handler\RetrieveInvoice::class));
         http\get('/roovolt/report', $this->handle(Handler\GenerateReport::class));
         http\post('/roovolt/api/signUp', $this->handle(Handler\SignUp::class));
+        http\get('/roovolt/api/data', $this->handle(Handler\GenerateJson::class));
 
         http\options('/roovolt/api/.*', $this->handle(CorsPreflight::class));
     }

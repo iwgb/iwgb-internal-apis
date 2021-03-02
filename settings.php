@@ -36,6 +36,7 @@ return [
     ],
     'roovolt' => [
         'invoiceKey' => $_ENV['ROOVOLT_INVOICE_RETRIEVAL_KEY'],
+        'dataKey' => $_ENV['ROOVOLT_DATA_KEY'],
         'airtable' => [
             'key' => $_ENV['AIRTABLE_KEY'],
             'base' => $_ENV['ROOVOLT_AIRTABLE_BASE_ID'],

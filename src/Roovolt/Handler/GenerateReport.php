@@ -2,10 +2,8 @@
 
 namespace Iwgb\Internal\Roovolt\Handler;
 
-use Doctrine\ORM\EntityManager;
 use Iwgb\Internal\Entity\Invoice;
 use Iwgb\Internal\HttpCompatibleException;
-use Iwgb\Internal\Provider\Provider;
 use League\Csv;
 use PhpZip\ZipFile;
 use Pimple\Container;
@@ -13,19 +11,17 @@ use Siler\Http\Request;
 use Siler\Http\Response;
 use Teapot\StatusCode;
 
-class GenerateReport extends RootHandler {
+class GenerateReport extends AbstractPersistingHandler {
 
     private const INVOICE_FIELDS = ['id', 'status', 'start', 'end', 'zone', 'hash', 'vehicle', 'link'];
     private const SHIFT_FIELDS = ['Start', 'End', 'Orders', 'Pay', 'invoice'];
     private const ADJUSTMENT_FIELDS = ['Label', 'Amount', 'invoice'];
 
-    private EntityManager $em;
     private string $reportId;
 
     public function __construct(Container $c) {
         parent::__construct($c);
 
-        $this->em = $c[Provider::DATABASE];
         $this->reportId = uniqid();
     }
 

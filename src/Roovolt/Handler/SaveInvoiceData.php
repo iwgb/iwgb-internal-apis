@@ -2,27 +2,16 @@
 
 namespace Iwgb\Internal\Roovolt\Handler;
 
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Iwgb\Internal\Entity\Invoice;
 use Iwgb\Internal\HttpCompatibleException;
-use Iwgb\Internal\Provider\Provider;
 use Iwgb\Internal\Roovolt\Dto\SaveInvoiceDataDto;
-use Pimple\Container;
 use Siler\Http\Request;
 use Siler\Http\Response;
 use Teapot\StatusCode;
 
-class SaveInvoiceData extends RootHandler {
-
-    private EntityManager $em;
-
-    public function __construct(Container $c) {
-        parent::__construct($c);
-
-        $this->em = $c[Provider::DATABASE];
-    }
+class SaveInvoiceData extends AbstractPersistingHandler {
 
     /**
      * {@inheritdoc}
