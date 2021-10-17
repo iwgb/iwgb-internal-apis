@@ -21,18 +21,15 @@ class GetUploadUrls extends RootHandler {
         $files = [];
         for ($i = 0; $i < $data->count; $i++) {
             $invoiceId = self::getInvoiceId();
-            $files[] = [
-                'id' => $invoiceId,
-                'url' => (string) $this->s3->createPresignedRequest(
-                    $this->s3->getCommand('PutObject', [
-                        'Bucket' => $this->bucket,
-                        'Key' => self::BUCKET_PREFIX . self::getInvoiceFilename($data->courierId, $invoiceId),
-                        'ACL' => 'private',
-                        'ContentType' => 'application/pdf',
-                    ]),
-                    self::URL_EXPIRY,
-                )->getUri(),
-            ];
+            $files[$invoiceId] = (string) $this->s3->createPresignedRequest(
+                $this->s3->getCommand('PutObject', [
+                    'Bucket' => $this->bucket,
+                    'Key' => self::BUCKET_PREFIX . self::getInvoiceFilename($data->courierId, $invoiceId),
+                    'ACL' => 'private',
+                    'ContentType' => 'application/pdf',
+                ]),
+                self::URL_EXPIRY,
+            )->getUri();
         }
 
         self::withCors();
