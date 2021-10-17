@@ -2,7 +2,7 @@
 
 namespace Iwgb\Internal\Roovolt\Handler;
 
-use Iwgb\Internal\Entity\Invoice;
+use Iwgb\Internal\Entity\LegacyInvoice;
 use Iwgb\Internal\HttpCompatibleException;
 use Siler\Http\Request;
 use Siler\Http\Response;
@@ -23,8 +23,8 @@ class GenerateJson extends AbstractPersistingHandler {
         }
 
         $invoices = [];
-        foreach ($this->em->getRepository(Invoice::class)->findAll() as $invoiceEntity) {
-            /** @var $invoiceEntity Invoice */
+        foreach ($this->em->getRepository(LegacyInvoice::class)->findAll() as $invoiceEntity) {
+            /** @var $invoiceEntity LegacyInvoice */
             $invoices[] = json_decode($invoiceEntity->getData());
         }
 

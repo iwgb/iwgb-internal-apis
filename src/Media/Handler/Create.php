@@ -3,7 +3,7 @@
 namespace Iwgb\Internal\Media\Handler;
 
 use Iwgb\Internal\HttpCompatibleException;
-use Iwgb\Internal\Provider\SpacesCdnProvider as S3;
+use Iwgb\Internal\Provider\S3StorageProvider as S3;
 use Siler\Http\Request;
 use Siler\Http\Response;
 use Teapot\StatusCode;

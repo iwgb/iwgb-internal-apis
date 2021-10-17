@@ -2,7 +2,7 @@
 
 namespace Iwgb\Internal\Roovolt\Handler;
 
-use Iwgb\Internal\Entity\Invoice;
+use Iwgb\Internal\Entity\LegacyInvoice;
 use Iwgb\Internal\HttpCompatibleException;
 use League\Csv;
 use PhpZip\ZipFile;
@@ -36,8 +36,8 @@ class GenerateReport extends AbstractPersistingHandler {
         $invoices = [];
         $shifts = [];
         $adjustments = [];
-        foreach ($this->em->getRepository(Invoice::class)->findAll() as $invoiceEntity) {
-            /** @var $invoiceEntity Invoice */
+        foreach ($this->em->getRepository(LegacyInvoice::class)->findAll() as $invoiceEntity) {
+            /** @var $invoiceEntity LegacyInvoice */
             $invoice = json_decode($invoiceEntity->getData(), true);
             $invoices[] = self::getValuesFromHeader(self::INVOICE_FIELDS, $invoice, [
                 'https://internal.iwgb.org.uk/roovolt/invoice?' . http_build_query([

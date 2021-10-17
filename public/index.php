@@ -5,6 +5,7 @@ $c = require __DIR__ . '/../bootstrap.php';
 use Iwgb\Internal\Media;
 use Iwgb\Internal\HttpCompatibleException;
 use Iwgb\Internal\Roovolt;
+use Iwgb\Internal\Unwrapped;
 use Siler\Container as Router;
 use Siler\Http\Response;
 use Siler\Route as http;
@@ -13,6 +14,7 @@ use Teapot\StatusCode;
 try {
     (new Media\Dispatcher($c))();
     (new Roovolt\Dispatcher($c))();
+    (new Unwrapped\Dispatcher($c))();
 } catch (HttpCompatibleException $e) {
     Response\json(
         ['error' => $e->getMessage()],

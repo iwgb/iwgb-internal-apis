@@ -43,4 +43,8 @@ return [
             'proxyKey' => $_ENV['AIRTABLE_PROXY_KEY'],
         ],
     ],
+    'intl' => [
+        'languages' => explode(',', $_ENV['INTL_LANGUAGES']),
+        'key' => $_ENV['INTL_API_KEY'],
+    ],
 ];

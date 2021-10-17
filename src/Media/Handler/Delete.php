@@ -5,7 +5,7 @@ namespace Iwgb\Internal\Media\Handler;
 use GuzzleHttp;
 use GuzzleHttp\Exception\GuzzleException;
 use Iwgb\Internal\HttpCompatibleException;
-use Iwgb\Internal\Provider\SpacesCdnProvider as S3;
+use Iwgb\Internal\Provider\S3StorageProvider as S3;
 use Pimple\Container;
 use Siler\Http\Response;
 

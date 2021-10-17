@@ -15,7 +15,8 @@
         "doctrine/orm": "^2.8",
         "league/csv": "^9.6",
         "nelexa/zip": "^3.3",
-        "guym4c/airtable-client": "^4.0"
+        "guym4c/airtable-client": "^4.0",
+        "spatie/data-transfer-object": "^2.0"
     },
     "autoload": {
         "psr-4": {

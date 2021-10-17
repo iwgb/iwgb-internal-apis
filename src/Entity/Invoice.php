@@ -6,125 +6,119 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
+ * @ORM\Table(name="t_Invoice")
  */
 class Invoice {
-
     /**
      * @ORM\Id
      * @ORM\Column
      */
-    protected string $id;
+    public string $id;
+
+    /**
+     * @ORM\Column
+     */
+    public string $market;
 
     /**
      * @ORM\Column(nullable=true)
      */
-    protected ?string $hash;
+    public ?string $hash;
 
     /**
      * @ORM\Column
      */
-    protected string $zone;
+    public string $area;
 
     /**
      * @ORM\Column
      */
-    protected string $status;
+    public string $status;
 
     /**
      * @ORM\Column
      */
-    protected string $riderId;
+    public string $courierId;
+
+    /**
+     * @ORM\Column
+     */
+    public string $vehicle;
 
     /**
      * @ORM\Column(type="text", length=65535)
      */
-    protected string $data;
-
-    public function __construct(string $id) {
-        $this->id = $id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getId(): string {
-        return $this->id;
-    }
+    public string $data;
 
     /**
      * @param string $id
+     * @return Invoice
      */
-    public function setId(string $id): void {
+    public function setId(string $id): Invoice {
         $this->id = $id;
+        return $this;
     }
 
     /**
-     * @return string|null
+     * @param string $market
+     * @return Invoice
      */
-    public function getHash(): ?string {
-        return $this->hash;
+    public function setMarket(string $market): Invoice {
+        $this->market = $market;
+        return $this;
     }
 
     /**
      * @param string|null $hash
+     * @return Invoice
      */
-    public function setHash(?string $hash): void {
+    public function setHash(?string $hash): Invoice {
         $this->hash = $hash;
+        return $this;
     }
 
     /**
-     * @return string
+     * @param string $area
+     * @return Invoice
      */
-    public function getZone(): string {
-        return $this->zone;
-    }
-
-    /**
-     * @return string
-     */
-    public function getStatus(): string {
-        return $this->status;
+    public function setArea(string $area): Invoice {
+        $this->area = $area;
+        return $this;
     }
 
     /**
      * @param string $status
+     * @return Invoice
      */
-    public function setStatus(string $status): void {
+    public function setStatus(string $status): Invoice {
         $this->status = $status;
+        return $this;
     }
 
     /**
-     * @param string $zone
+     * @param string $courierId
+     * @return Invoice
      */
-    public function setZone(string $zone): void {
-        $this->zone = $zone;
+    public function setCourierId(string $courierId): Invoice {
+        $this->courierId = $courierId;
+        return $this;
     }
 
     /**
-     * @return string
+     * @param string $vehicle
+     * @return Invoice
      */
-    public function getData(): string {
-        return $this->data;
+    public function setVehicle(string $vehicle): Invoice {
+        $this->vehicle = $vehicle;
+        return $this;
     }
 
     /**
      * @param string $data
+     * @return Invoice
      */
-    public function setData(string $data): void {
+    public function setData(string $data): Invoice {
         $this->data = $data;
-    }
-
-    /**
-     * @return string
-     */
-    public function getRiderId(): string {
-        return $this->riderId;
-    }
-
-    /**
-     * @param string $riderId
-     */
-    public function setRiderId(string $riderId): void {
-        $this->riderId = $riderId;
+        return $this;
     }
 }

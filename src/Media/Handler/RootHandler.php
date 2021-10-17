@@ -17,7 +17,7 @@ abstract class RootHandler extends AbstractHandler {
 
     public function __construct(Container $c) {
         parent::__construct($c);
-        $this->store = $c[Provider::SPACES];
+        $this->store = $c[Provider::S3];
         $this->bucket = $this->settings['spaces']['bucket'];
         $this->publicRoot = $this->settings['spaces']['publicRoot'];
     }

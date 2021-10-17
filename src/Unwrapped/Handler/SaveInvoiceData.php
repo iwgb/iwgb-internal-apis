@@ -1,12 +1,12 @@
 <?php
 
-namespace Iwgb\Internal\Roovolt\Handler;
+namespace Iwgb\Internal\Unwrapped\Handler;
 
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
-use Iwgb\Internal\Entity\LegacyInvoice;
+use Iwgb\Internal\Entity\Invoice;
 use Iwgb\Internal\HttpCompatibleException;
-use Iwgb\Internal\Roovolt\Dto\SaveInvoiceDataDto;
+use Iwgb\Internal\Unwrapped\Dto\SaveInvoiceDataDto;
 use Siler\Http\Request;
 use Siler\Http\Response;
 use Teapot\StatusCode;
@@ -28,26 +28,20 @@ class SaveInvoiceData extends AbstractPersistingHandler {
             );
         }
 
-        $data = new SaveInvoiceDataDto();
+        $data = SaveInvoiceDataDto::fromRequest();
 
         foreach ($data->invoices as $invoiceData) {
             if (
                 !empty($invoiceData->hash)
                 && $this->hashExistsInDatabase($invoiceData->hash)
             ) {
-                $this->store->deleteObject([
+                $this->s3->deleteObject([
                     'Bucket' => $this->bucket,
-                    'Key' => self::BUCKET_PREFIX . self::getInvoiceFilename($data->riderId, $invoiceData->id),
+                    'Key' => self::BUCKET_PREFIX . self::getInvoiceFilename($data->courierId, $invoiceData->id),
                 ]);
                 continue;
             }
-            $invoice = (new LegacyInvoice($invoiceData->id));
-            $invoice->setHash($invoiceData->hash);
-            $invoice->setZone($data->zone);
-            $invoice->setStatus($invoiceData->status);
-            $invoice->setRiderId($data->riderId);
-            $invoice->setData(json_encode($invoiceData->serialize($data)));
-            $this->em->persist($invoice);
+            $this->em->persist($invoiceData->toEntity($data));
         }
         $this->em->flush();
 
@@ -55,7 +49,7 @@ class SaveInvoiceData extends AbstractPersistingHandler {
     }
 
     private function hashExistsInDatabase(string $hash): bool {
-        return $this->em->getRepository(LegacyInvoice::class)
-            ->findOneBy(['hash' => $hash]) !== null;
+        return $this->em->getRepository(Invoice::class)
+                ->findOneBy(['hash' => $hash]) !== null;
     }
 }

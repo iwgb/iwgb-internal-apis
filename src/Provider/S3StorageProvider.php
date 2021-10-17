@@ -6,13 +6,13 @@ use Aws\S3\S3Client;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 
-class SpacesCdnProvider implements ServiceProviderInterface {
+class S3StorageProvider implements ServiceProviderInterface {
 
     /**
      * @inheritDoc
      */
     public function register(Container $c) {
-        $c[Provider::SPACES] = fn(Container $c): S3Client => new S3Client([
+        $c[Provider::S3] = fn(Container $c): S3Client => new S3Client([
             'version'    => 'latest',
             'region'     => $c[Provider::SETTINGS]['spaces']['region'],
             'endpoint'   => 'https://' . $c[Provider::SETTINGS]['spaces']['region'] . '.digitaloceanspaces.com',
