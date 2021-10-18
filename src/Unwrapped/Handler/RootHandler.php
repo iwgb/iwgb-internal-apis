@@ -10,7 +10,7 @@ use Pimple\Container;
 
 abstract class RootHandler extends AbstractHandler {
 
-    protected const BUCKET_PREFIX = 'campaign/gig-eco-unwrapped/';
+    protected const BUCKET_PREFIX = 'campaign/gig-eco-unwrapped/pdf/';
     protected const INVALID_KEY_ERROR = "You're not allowed to do that";
 
     protected S3Client $s3;
